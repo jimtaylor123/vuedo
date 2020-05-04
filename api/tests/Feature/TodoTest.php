@@ -83,6 +83,26 @@ class TodoTest extends TestCase
         $this->assertTrue($updatedTodo->description === 'A different description');
     }
 
+     /** @test */
+     public function a_todo_can_be_deleted()
+     {
+         // Create todo
+         $this->post(
+             '/api/todos',
+             $this->data()
+         );
+
+         $todo = Todo::first();
+
+         $response = $this->delete(
+             "/api/todos/$todo->id"
+         );
+
+         $response->assertStatus(204);
+
+         $this->assertTrue(count(Todo::all()) === 0);
+     }
+
     private function data()
     {
         return [

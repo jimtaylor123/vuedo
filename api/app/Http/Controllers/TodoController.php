@@ -43,8 +43,9 @@ class TodoController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
-    public function destroy()
+    public function destroy(Todo $todo)
     {
-
+        $todo->delete();
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }

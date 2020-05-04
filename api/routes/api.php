@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'AppController@version');
+Route::get('todos', 'TodoController@index');
+Route::post('todos', 'TodoController@store');

@@ -58,7 +58,29 @@ class TodoTest extends TestCase
         $this->assertTrue($todo->description === $this->data()['description']);
         $this->assertTrue($todo->complete === $this->data()['complete']);
         $this->assertTrue($todo->due_by === $this->data()['due_by']);
+    }
 
+    /** @test */
+    public function a_todo_can_be_amended()
+    {
+        // Create todo
+        $this->post(
+            '/api/todos',
+            $this->data()
+        );
+
+        $todo = Todo::first();
+
+        $response = $this->patch(
+            "/api/todos/$todo->id",
+            ['description' => 'A different description']
+        );
+
+        $response->assertStatus(200);
+
+        $updatedTodo = Todo::first();
+
+        $this->assertTrue($updatedTodo->description === 'A different description');
     }
 
     private function data()

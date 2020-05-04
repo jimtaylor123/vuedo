@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTodoRequest extends FormRequest
+class UpdateTodoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class StoreTodoRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required|max:255|string',
-            'complete'    => 'required|boolean',
+            'description' => 'max:255|string',
+            'complete'    => 'boolean',
             'due_by'      => 'date_format:Y-m-d H:i:s'
         ];
     }

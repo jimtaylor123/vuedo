@@ -26,6 +26,6 @@ $factory->define(Todo::class, function (Faker $faker) {
     return [
         'description' => $faker->randomElement($tasks),
         'complete' => $faker->boolean,
-        'due_by' => $faker->optional()->dateTime
+        'due_by' => $faker->optional()->dateTimeBetween('-1 week', '+1 week')
     ];
 });

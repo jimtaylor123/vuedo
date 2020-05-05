@@ -28,8 +28,6 @@ class TodoController extends Controller
 
     public function update(UpdateTodoRequest $request, Todo $todo) : JsonResponse
     {
-        $todo = Todo::findOrFail($todo->id);
-
         collect($todo->attributesToArray())->map(function($value, $attribute) use($request, $todo) {
             if(isset($request->$attribute)){
                 $todo->$attribute = $request->$attribute;

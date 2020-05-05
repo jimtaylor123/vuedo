@@ -1,29 +1,34 @@
 <template>
-  <div id="app" class="bg-pink-500">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container mx-auto max-w-5xl flex flex-col bg-gray-100">
+    <!-- Header -->
+    <div
+      class="bg-indigo-800 text-white text-2xl antialized py-5 text-center font-normal"
+    >
+      Todos
+    </div>
+
+    <TodoForm />
+
+    <div class="mx-5 md:mx-24 pt-3 border-b-2 border-indigo-800 opacity-25"></div>
+
+    <!-- Main -->
+    <div class="flex-grow">
+      <Todos />
+    </div>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import './assets/css/app.css'
+import TodoForm from "./components/TodoForm.vue";
+import Todos from "./components/Todos.vue";
+import "./assets/css/app.css";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TodoForm,
+    Todos,
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -9,9 +9,14 @@
   },
   "dependencies": {
     "autoprefixer": "^9.7.6",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "moment": "^2.25.3",
     "tailwindcss": "^1.4.4",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-zondicons": "^0.1.10",
+    "vuejs-datetimepicker": "^1.1.13",
+    "vuex": "^3.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
@@ -36,10 +41,10 @@
     },
     "rules": {}
   },
-  "postcss" : {
+  "postcss": {
     "plugins": {
-      "tailwindcss":{},
-      "autoprefixer":{}
+      "tailwindcss": {},
+      "autoprefixer": {}
     }
   },
   "browserslist": [

@@ -15,7 +15,6 @@ class TodoTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        Artisan::call('migrate');
     }
 
     public function tearDown(): void

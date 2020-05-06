@@ -82,17 +82,21 @@
 
         <!--Footer-->
         <div class="flex justify-end pt-2">
+      
           <button
-            class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
+            @click="destroy()"
+            class="px-4 bg-red-300 border border-gray-900 p-3 rounded-lg text-gray-900 hover:bg-indigo-400 mr-2"
+          >
+            Delete
+          </button>
+
+          <button
+            @click="update()"
+            class="px-4 bg-transparent p-3 rounded-lg bg-indigo-500 text-gray-100 hover:bg-gray-100 hover:text-indigo-400 "
           >
             Update
           </button>
-          <button
-            @click="close()"
-            class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400"
-          >
-            Close
-          </button>
+
         </div>
       </div>
     </div>
@@ -100,6 +104,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import moment from 'moment';
 export default {
   name: "Modal",
@@ -119,15 +124,32 @@ export default {
       }
   },
   methods: {
+     ...mapActions(["updateTodo", "deleteTodo"]),
     close() {
       this.$emit("closeModal", true);
     },
      due(){
-        if( this.todo.due_by !== null){
+        if( this.todo.due_by !== null && this.todo.due_by !== undefined){
             return moment(this.todo.due_by).format('YYYY-MM-DD');
         }
-        return '';
-    }
+        return undefined;
+    },    
+    update() {
+      const data = {
+        "description": this.description, 
+        "complete": this.checked,
+      }
+
+      if(this.due_by){ data["due_by"] = this.due_by; }
+      if(this.due_by === ''){data["due_by"] = null}
+
+      this.updateTodo([this.todo, data]);
+      this.close();
+    },
+    destroy() {
+      this.deleteTodo(this.todo);
+      this.close();
+    },
   },
   computed : {
    
@@ -141,6 +163,7 @@ export default {
     todo: function(){
         this.checked = this.todo.complete;
         this.description = this.todo.description;
+        this.due_by = this.todo.due_by;
     }
   },
   mounted() {    

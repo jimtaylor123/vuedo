@@ -26,7 +26,7 @@ class UpdateTodoRequest extends FormRequest
         return [
             'description' => 'max:255|string',
             'complete'    => 'boolean',
-            'due_by'      => 'date_format:Y-m-d H:i:s'
+            'due_by'      => 'date_format:Y-m-d|nullable'
         ];
     }
 }

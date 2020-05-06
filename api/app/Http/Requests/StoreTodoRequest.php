@@ -26,7 +26,7 @@ class StoreTodoRequest extends FormRequest
         return [
             'description' => 'required|max:255|string',
             'complete'    => 'required|boolean',
-            'due_by'      => 'date_format:Y-m-d H:i:s'
+            'due_by'      => 'date_format:Y-m-d'
         ];
     }
 }

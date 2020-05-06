@@ -9,8 +9,6 @@
 
     <TodoForm />
 
-    <div class="mx-5 md:mx-24 pt-3 border-b-2 border-indigo-800 opacity-25"></div>
-
     <!-- Main -->
     <div class="flex-grow">
       <Todos />

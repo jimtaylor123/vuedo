@@ -17,7 +17,7 @@ class CreateTodosTable extends Migration
             $table->id();
             $table->string('description');
             $table->boolean('complete')->default(false)->nullable();
-            $table->dateTime('due_by')->nullable();
+            $table->date('due_by')->nullable();
             $table->timestamps();
         });
     }

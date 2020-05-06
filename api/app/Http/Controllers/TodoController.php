@@ -29,7 +29,7 @@ class TodoController extends Controller
     public function update(UpdateTodoRequest $request, Todo $todo) : JsonResponse
     {
         collect($todo->attributesToArray())->map(function($value, $attribute) use($request, $todo) {
-            if(isset($request->$attribute)){
+            if(isset($request->$attribute) || $attribute == 'due_by'){
                 $todo->$attribute = $request->$attribute;
             }
         });

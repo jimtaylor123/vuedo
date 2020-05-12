@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+
+  # Nginx web server
+  nginx:
+    image: nginx
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: any
+        max_attempts: 3
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/etc/nginx/conf.d"
+      - "/etc/nginx/vhost.d"
+      - "/usr/share/nginx/html"
+      - "../config/nginx/certs:/etc/nginx/certs:ro"
+    networks:
+      - frontend
+
+########################################
+## Sites to host
+#######################################
+
+  vuedoapi:
+    restart: always
+    image: webdevops/php-nginx:7.2
+    volumes:
+      - ../../api:/var/www
+      - ../config/env/.env:/var/www/.env
+    environment:
+      - VIRTUAL_HOST=api.vuedo.ga
+      - VIRTUAL_NETWORK=nginx-proxy
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=api.vuedo.ga
+      - LETSENCRYPT_EMAIL=jim@jimtaylor.space
+
+  vuedoweb:
+    restart: always
+    image: webdevops/php-nginx:7.2
+    volumes:
+      - "../../front:/usr/share/nginx/html"
+      - "./volumes/nginx-vuedo-website/conf.d/:/etc/nginx/conf.d"
+    environment:
+      - VIRTUAL_HOST=www.vuedo.ga
+      - VIRTUAL_NETWORK=nginx-proxy
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=www.vuedo.ga
+      - LETSENCRYPT_EMAIL=jim@jimtaylor.space
+
+volumes:
+  - nginx
+
+networks:
+    frontend:
+      external: true
+    backend: 
+      external: false
